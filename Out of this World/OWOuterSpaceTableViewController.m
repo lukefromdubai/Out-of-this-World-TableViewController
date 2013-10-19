@@ -35,8 +35,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    /* Allocate and initialize our planets array */
     self.planets = [[NSMutableArray alloc] init];
 
+    /* Use fast enumeration to iterate through all NSMutableDictionaries in the array returned from the class method allKnownPlanets. First create an NSString with the planet's file name. Use a format string to add the .jpg extension to each planet name. Create a OWSpace object and use the custom initializer initWithData. Pass in both the dictionary and a UIImage object. Add the planet object to the planets array. */
     for (NSMutableDictionary *planetData in [AstronomicalData allKnownPlanets])
     {
         NSString *imageName = [NSString stringWithFormat:@"%@.jpg", planetData[PLANET_NAME]];
@@ -44,6 +46,9 @@
         [self.planets addObject:planet];
     }
     
+    /* Practice NSMutableDictionary and NSNumber */
+    
+    /* Create a NSMutableDictionary and add 3 key value pairs */
     NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] init];
     NSString *firstColor = @"red";
     [myDictionary setObject:firstColor forKey:@"firetruck color"];
@@ -51,9 +56,11 @@
     [myDictionary setObject:@"yellow" forKey:@"star color"];
     NSLog(@"%@", myDictionary);
     
+    /* Access a value for a key in our dictionary*/
     NSString *blueString = [myDictionary objectForKey:@"ocean color"];
     NSLog(@"%@",blueString);
     
+    /* Create two NSNumber objects. Use the class methods numberWithInt and numberWithFloat to wrap 2 primitives in NSNumbers.*/
     NSNumber *myNumber = [NSNumber numberWithInt:5];
     NSLog(@"%@", myNumber);
     NSNumber *floatNumber = [NSNumber numberWithFloat:3.14];
@@ -88,11 +95,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    
+    /* Access the OWSpaceObject from our planets array. Use the OWSpaceObject's properties to update the cell's properties.*/
     OWSpaceObject *planet = [self.planets objectAtIndex:indexPath.row];
     cell.textLabel.text = planet.name;
     cell.detailTextLabel.text = planet.nickname;
     cell.imageView.image = planet.spaceImage;
     
+    /* Customize the appearence of the TableViewCells. */
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.detailTextLabel.textColor = [UIColor colorWithWhite:0.5 alpha:1.0];
